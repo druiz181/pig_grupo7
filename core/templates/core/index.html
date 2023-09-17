@@ -1,8 +1,16 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block title %} Inicio {% endblock %}
 
 {% block content %}  
-    <h2>  Bienvenido/a a Depotfy, {{nombre_usuario|title}} </h2>
+    <h3>  Bienvenido/a a Depotfy, {{nombre_usuario|title}} </h3>
 
+    <div class="video">
+        <video controls autoplay>
+            <source src="{% static 'core/instalaciones.mp4' %}" type="video/mp4">
+            
+        </video>
+
+    </div>
 {% endblock %}
