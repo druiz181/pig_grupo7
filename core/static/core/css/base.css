@@ -18,3 +18,8 @@ footer {
     opacity: 0.6; 
     filter:(opacity=50);
 }
+
+h3 {
+    color: white;
+    margin-left: 15px;
+}
