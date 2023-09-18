@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}   {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Depotfy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'ingresos' %}">Ingresos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pedidos' %}">Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'stock' %}">Stock</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inventarios' %}">Inventarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'posiciones' %}">Posiciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'usuarios' %}">Usuarios</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <header>
+        {% block section_title %} {% endblock %}
+
+    </header>
+    
+
+    <main>
+        {% block content %}  {% endblock %}
+
+    </main>
+
+    <footer class="footer bg-dark text-white text-center py-3">
+        <p> 2023 - Depotfy</p>
+        <div class="redes">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>
