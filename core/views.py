@@ -2,25 +2,32 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("Index")
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/index.html", context)
 
 def ingresos(request):
-    return HttpResponse("Ingresos")
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/ingresos.html", context)
 
 def pedidos(request):
-    return HttpResponse("Pedidos")
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/pedidos.html", context)
 
 def stock(request):
-    return HttpResponse("Stock")
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/stock.html", context)
 
 def inventarios(request):
-    return HttpResponse("Inventarios")
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/inventarios.html", context)
 
 def posiciones(request):
-    return HttpResponse("Posiciones")
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/posiciones.html", context)
 
 def usuarios(request):
-    return HttpResponse("Usuarios")
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/usuarios.html", context)
 
 def usuario_detalle(request, usuario_id):
     return HttpResponse(f"Usuario Detalle {usuario_id}")
