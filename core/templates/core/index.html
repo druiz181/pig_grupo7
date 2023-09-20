@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+{% block title %} Inicio {% endblock %}
+
+{% block content %}  
+    <h3>  Bienvenido/a a Depotfy, {{nombre_usuario|title}} </h3>
+
+    <form class="w-25 p-3 text-light">
+        <h3>Ingrese usuario y contraseña</h3>
+        <label for="inputEmail">Usuario</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword">Contraseña</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Recordar
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+
+    <div class="video">
+        <video playsinline autoplay muted loop id="fondos">
+            <source src="{% static 'core/img/instalaciones.mp4' %}" type="video/mp4">
+            
+        </video>
+
+    </div>
+{% endblock %}

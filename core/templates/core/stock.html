@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'core/css/stock.css' %}">
+
+{% block title %} Stock {% endblock %}
+
+{% block section_title %} <h3>Stock</h3> {% endblock %}
+
+{% block content %}  
+
+<img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image">
+
+<button type="button" class="btn btn-light">Consulta de Stock</button>
+<button type="button" class="btn btn-light">Movimientos de un material </button>
+
+{% endblock %}

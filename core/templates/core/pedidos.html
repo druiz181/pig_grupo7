@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'core/css/pedidos.css' %}">
+
+{% block title %} Pedidos {% endblock %}
+
+{% block section_title %} <h3>Pedidos</h3> {% endblock %}
+
+{% block content %}  
+
+<img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image">
+
+<button type="button" class="btn btn-light">Nuevo pedido</button>
+<button type="button" class="btn btn-light">Modificar pedido </button>
+<button type="button" class="btn btn-light">Listar pedidos</button>
+
+{% endblock %}
