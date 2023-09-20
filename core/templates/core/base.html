@@ -4,7 +4,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+    <meta name="description" content="Seekers, is a moba online free for everyone">
+    <meta name="robots" content="index, follow"> 
+
     <title> {% block title %}   {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -26,24 +29,6 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" href="{% url 'index' %}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'ingresos' %}">Ingresos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'pedidos' %}">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'stock' %}">Stock</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventarios' %}">Inventarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'posiciones' %}">Posiciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'usuarios' %}">Usuarios</a>
                     </li>
                 </ul>    
                 <span class="navbar-text">
