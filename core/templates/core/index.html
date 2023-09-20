@@ -4,7 +4,7 @@
 {% block title %} Inicio {% endblock %}
 
 {% block content %}  
-    <h3>  Bienvenido/a a Depotfy, {{nombre_usuario|title}} </h3>
+    <h3>Bienvenido/a a Depotfy {{ user1.first_name }} {{ user1.last_name }} </h3>
 
     <div class="video">
         <video controls autoplay>
