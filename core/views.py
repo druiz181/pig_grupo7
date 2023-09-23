@@ -4,8 +4,8 @@ from django.urls import reverse
 
 user1 = {
     "dni": 111111111,
-    "first_name": "test",
-    "last_name": "test_last",
+    "first_name": "User",
+    "last_name": "Test",
     "email": "test@depotfy.com",
     "phone_number": 111111,
     "rol": "Warehouse Manager",
@@ -13,6 +13,7 @@ user1 = {
 }
 
 users = [user1]
+login_template = "core/account/login.html"
 
 def logged_in(request):
     if request.POST['email'] == user1.get("email"):
@@ -21,18 +22,22 @@ def logged_in(request):
 
         return render(request, "core/index.html",  context={"user1":user1})
     
-    return render(request, "core/login.html")
+    return render(request, login_template)
 
 
 def index(request):
-    if not user1["logged_in"]: return render(request, "core/login.html")
+    if not user1["logged_in"]: return render(request, login_template)
     return render(request, "core/index.html", context={"user1":user1})
 
 def ingresos(request):
+    if not user1["logged_in"]: return render(request, "core/accounts/login.html")
+
     context = {'nombre_usuario': 'Usuario de prueba'}
     return render(request, "core/ingresos.html", context)
 
 def pedidos(request):
+    if not user1["logged_in"]: return render(request, "core/login.html")
+
     context = {'nombre_usuario': 'Usuario de prueba'}
     return render(request, "core/pedidos.html", context)
 
