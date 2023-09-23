@@ -9,8 +9,9 @@ user1 = {
     "email": "test@depotfy.com",
     "phone_number": 111111,
     "rol": "Warehouse Manager",
-    "logged_in": False
+    "logged_in": True
 }
+
 
 users = [user1]
 login_template = "core/account/login.html"

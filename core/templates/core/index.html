@@ -3,10 +3,16 @@
 
 {% block title %} Inicio {% endblock %}
 
-{% block content %}
+{% block header %}
     {% include "core/partials/navbar.html" %}
-    <img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image">
-    <h3>  Bienvenido/a a Depotfy, {{user1.first_name}} {{user1.last_name}}</h3>
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
 
-    {% include "core/partials/footer.html" %}
+{% block main %}
+    <!-- <img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image"> -->
+    <!-- <h3>  Bienvenido/a a Depotfy, {{user1.first_name}} {{user1.last_name}}</h3> -->
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}
+{% block sidebar %} 
+<h3>hahha</h3>
 {% endblock %}
