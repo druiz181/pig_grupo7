@@ -5,12 +5,20 @@
 
 {% block section_title %} <h3>Pedidos</h3> {% endblock %}
 
-{% block content %}  
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+    <button type="button" class="btn btn-light">Nuevo pedido</button>
+    <button type="button" class="btn btn-light">Modificar pedido </button>
+    <button type="button" class="btn btn-light">Listar pedidos</button>
+{% endblock %}
 
-<img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image">
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
 
-<button type="button" class="btn btn-light">Nuevo pedido</button>
-<button type="button" class="btn btn-light">Modificar pedido </button>
-<button type="button" class="btn btn-light">Listar pedidos</button>
-
+{% block footer %}
+    <!-- {% include "core/partials/footer.html" %} -->
 {% endblock %}

@@ -3,10 +3,10 @@
 // {
 //     var   md; // remember mouse down info
 //     const first  = document.getElementById("first");
-    // const second = document.getElementsByClassName("js-sidebar")[0];
+// const second = document.getElementsByClassName("js-sidebar")[0];
 
 //     element.onmousedown = onMouseDown;
-    
+
 //     function onMouseDown(e)
 //     {
 //       //console.log("mouse down: " + e.clientX);
@@ -44,22 +44,26 @@
 //     }
 // }
 
-
 // dragElement( document.getElementById("separator"), "H" );
 
+function start() {
+  let btnToggler = document.getElementsByClassName("js-sidebar__toggler")[0];
+  let sidebarWrapper = document.getElementsByClassName("js-sidebar__wrapper")[0];
+  let mainContentWrapper = document.getElementsByClassName("js-main__wrapper")[0]; 
 
-let btnToggler = document.getElementsByClassName("js-sidebar__toggler")[0];
-let sidebar = document.getElementsByClassName("js-sidebar")[0];
-
-
-btnToggler.addEventListener("click", (e) => {
-  console.log(e.target == btnToggler, "--------");
-  if (sidebar.classList.contains("js-sidebar__active")) {
-    sidebar.classList.remove("js-sidebar__active");
+  btnToggler.addEventListener("click", () => {
+    if (sidebarWrapper.classList.contains("toggled")) {
+      sidebarWrapper.classList.remove("toggled");
+      mainContentWrapper.classList.remove('toggled')
+    } else {
+    sidebarWrapper.classList.toggle("toggled");
+    mainContentWrapper.classList.toggle("toggled");
   }
-  else sidebar.classList.toggle("js-sidebar__active");
-});
+    console.log();
+  });
 
-// Close the sidebar when the focus is lost on the button
-btnToggler.addEventListener('blur', () => {
-});
+  // Close the sidebar when the focus is lost on the button
+  btnToggler.addEventListener("blur", () => {});
+}
+
+window.addEventListener("load", start);

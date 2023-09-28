@@ -1,4 +1,4 @@
-/* #fondos {
+#fondos {
     object-fit: cover; width: 100vw;
     height: 100vh;
     position: fixed;
@@ -6,7 +6,7 @@
     left: 0;
     z-index: -100;
     opacity: 50;
-} */
+}
 
 .minh-100 {
     max-height: 100vh;

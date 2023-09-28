@@ -5,14 +5,17 @@
 
 {% block header %}
     {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+    <img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image">
+    <h3>  Bienvenido/a a Depotfy, {{user1.first_name}} {{user1.last_name}}</h3>
+{% endblock %}
+
+{% block sidebar %} 
     {% include "core/partials/sidebar.html" %}
 {% endblock %}
 
-{% block main %}
-    <!-- <img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image"> -->
-    <!-- <h3>  Bienvenido/a a Depotfy, {{user1.first_name}} {{user1.last_name}}</h3> -->
+{% block footer %}
     <!-- {% include "core/partials/footer.html" %} -->
-{% endblock %}
-{% block sidebar %} 
-<h3>hahha</h3>
 {% endblock %}

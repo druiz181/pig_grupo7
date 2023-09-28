@@ -9,21 +9,22 @@
     <meta name="description" content="Depostfy es un WMS">
     <meta name="robots" content="index, follow">
 
-    <title> {% block title %} {% endblock %}</title>
-
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>´
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'core/main.css' %}">
+
+    <title> {% block title %} {% endblock %}</title>
 </head>
 
 <body class="vw-100 minh-100">
@@ -31,18 +32,22 @@
         {% block header %} {% endblock %}
     </header>
     <main class="">
+        <img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image">
         <div class="w-100 h-100">
             <div class="splitter">
-                <section id="first" class="bg-dark">
+                <section id="first" class="c-main__wrapper bg-dark js-main__wrapper">
                     {% block main %} {% endblock %}
                 </section>
                 <div id="separator"></div>
-                <div id="second">
+                <aside id="second" class="c-sidebar__wrapper js-sidebar__wrapper">
                     {% block sidebar %} {% endblock %}
-                </div>
+                </aside>
             </div>
         </div>
     </main>
+    <footer>
+        {% block footer %} {% endblock %}
+    </footer>
 </body>
 
 </html>
