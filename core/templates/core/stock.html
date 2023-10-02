@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Stock {% endblock %}
+
+{% block section_title %} <h3>Stock</h3> {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+    <button type="button" class="btn btn-light">Consulta de Stock</button>
+    <button type="button" class="btn btn-light">Movimientos de un material </button>
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %}
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}

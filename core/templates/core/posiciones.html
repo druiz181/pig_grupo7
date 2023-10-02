@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Posiciones {% endblock %}
+
+{% block section_title %} <h3>Posiciones</h3> {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+    <button type="button" class="btn btn-light">Crear posiciones</button>
+    <button type="button" class="btn btn-light">Modificar posiciones</button>
+    <button type="button" class="btn btn-light">Listar posicones</button>
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %}
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}

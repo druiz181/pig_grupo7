@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Usuarios {% endblock %}
+
+{% block section_title %} <h3>Usuarios</h3> {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+    <button type="button" class="btn btn-light">Alta de usuarios</button>
+    <button type="button" class="btn btn-light">Modificacion de usuarios</button>
+    <button type="button" class="btn btn-light">Listado de usuarios</button>
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %}
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Ingresos {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+
+    <h3> Nuevo Ingreso</h3>
+
+    <form id="nuevoingreso" method="post" action="{% url 'nuevo_ingreso' %}">
+        {% csrf_token %}
+        {{ nuevo_ingreso_form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %} 
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}
