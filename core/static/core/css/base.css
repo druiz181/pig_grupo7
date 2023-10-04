@@ -16,6 +16,7 @@ nav {
     opacity: 0.5; 
     filter:(opacity=50);
 }
+
 footer {
     position: absolute;
     bottom: 8px;
