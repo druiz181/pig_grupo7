@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Ingresos {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+    <button type="button" class="btn btn-light">Nuevo ingreso</button>
+    <button type="button" class="btn btn-light">Modificar ingreso</button>
+    <button type="button" class="btn btn-light">Listar ingresos</button>
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %} 
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}
