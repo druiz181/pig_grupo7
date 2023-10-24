@@ -8,9 +8,11 @@
 {% endblock %}
     
 {% block main %}
-    <button type="button" class="btn btn-light">Nuevo ingreso</button>
+    <a href="{% url 'nuevo_ingreso' %}" class="btn btn-light">Nuevo ingreso</a>    
+    <!-- <button type="button" class="btn btn-light">Nuevo ingreso</button> -->
     <button type="button" class="btn btn-light">Modificar ingreso</button>
-    <button type="button" class="btn btn-light">Listar ingresos</button>
+    <a href="{% url 'listar_ingresos' %}" class="btn btn-light">Listado de ingreso</a>
+    <!-- <button type="button" class="btn btn-light">Listar ingresos</button> -->
 {% endblock %}
 
 {% block sidebar %} 

@@ -10,9 +10,10 @@
 {% endblock %}
     
 {% block main %}
-    <button type="button" class="btn btn-light">Alta de usuarios</button>
+    <!-- <button type="button" class="btn btn-light">Alta de usuarios</button> -->
+    <a href="{% url 'alta_usuario' %}" class="btn btn-light">Alta de usuarios</a>
     <button type="button" class="btn btn-light">Modificacion de usuarios</button>
-    <button type="button" class="btn btn-light">Listado de usuarios</button>
+    <a href="{% url 'listado_usuarios' %}" class="btn btn-light">Listado de usuarios</a>
 {% endblock %}
 
 {% block sidebar %} 

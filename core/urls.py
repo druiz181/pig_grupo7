@@ -12,5 +12,7 @@ urlpatterns = [
     path("inventarios/", views.inventarios, name = "inventarios"),
     path("posiciones/", views.posiciones, name = "posiciones"),
     path("usuarios/", views.usuarios, name = "usuarios"),
+    path("alta_usuario/", views.alta_usuario, name="alta_usuario"),
+    path('listado_usuarios/', views.listado_usuarios, name='listado_usuarios'),
     path("usuarios/<str:usuario_id>/", views.usuario_detalle, name = "usuario_detalle"),
 ]

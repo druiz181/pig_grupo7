@@ -1,28 +1,31 @@
 {% extends "core/base.html" %}
 {% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/forms.css' %}">
+{% endblock %}
 
 {% block title %} Ingresos {% endblock %}
 
 {% block header %}
     {% include "core/partials/navbar.html" %}
 {% endblock %}
-    
+
+
 {% block main %}
+<div class="container" style="background-color: #e0e0e0";>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 h3 style="color: black;">Nuevo Ingreso</h3>
 
-    <h3> Nuevo Ingreso</h3>
-
-    <form id="nuevoingreso" method="post" action="{% url 'nuevo_ingreso' %}">
-        {% csrf_token %}
-        {{ nuevo_ingreso_form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
-
-{% endblock %}
-
-{% block sidebar %} 
-    {% include "core/partials/sidebar.html" %}
-{% endblock %}
-
-{% block footer %} 
-    <!-- {% include "core/partials/footer.html" %} -->
+            <form id="nuevoingreso" method="post" action="{% url 'nuevo_ingreso' %}">
+                {% csrf_token %}
+                {{ nuevo_ingreso_form.as_p }}
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-dark">Enviar</button>
+                </div>
+            </form>
+                
+        </div>
+    </div>
+</div>
 {% endblock %}

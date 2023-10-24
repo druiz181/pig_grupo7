@@ -1,15 +1,37 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block title %} Istar Ingresos {% endblock %}
+{% block title %} Listado de Ingresos {% endblock %}
 
 {% block header %}
     {% include "core/partials/navbar.html" %}
 {% endblock %}
-    
+
 {% block main %}
-    
-<h3> Listar Ingresos </h3>
+<h3> Listado de Ingresos </h3>
+
+<table class="table table-striped" style="background-color: #e0e0e0;">
+    <thead>
+        <tr>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ingreso in listado_ingresos %}
+            <tr>
+                <td>{{ ingreso.descripcion }}</td>
+                <td>{{ ingreso.cantidad }}</td>
+                <td>{{ ingreso.fecha_ingreso }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">No hay ingresos</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
 
