@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Usuarios {% endblock %}
+
+{% block section_title %} <h3>Usuarios</h3> {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+    <!-- <button type="button" class="btn btn-light">Alta de usuarios</button> -->
+    <a href="{% url 'alta_usuario' %}" class="btn btn-light">Alta de usuarios</a>
+    <button type="button" class="btn btn-light">Modificacion de usuarios</button>
+    <a href="{% url 'listado_usuarios' %}" class="btn btn-light">Listado de usuarios</a>
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %}
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}

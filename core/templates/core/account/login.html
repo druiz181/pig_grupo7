@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Log in {% endblock title %}
+
+{% block content %}
+    <form method="post" action="{% url 'logged_in' %}" class="w-25 p-3 text-light">
+        {% csrf_token %}
+        <fieldset>
+            <legend >Ingrese usuario y contraseña</legend>
+            <label class="w-100" for="inputEmail">
+                <span>Email: </span>
+                <input id="inputEmail" class="form-control" type="email" name="email" placeholder="example@depotfy.com.ar" required autofocus>
+            </label>
+            <label class="w-100 justify-content-around" for="inputPassword">
+                <span>Password: </span>
+                <input id="inputPassword" class="form-control" type="password" name="password" placeholder="Contraseña" required>
+            </label>
+
+            <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" value="remember-me"> Recordar
+            </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+        </fieldset>
+        <a href="pass_recover.html">Olvidaste tu contraseña?    </a>
+    </form>
+
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+
+    <div class="video">
+        <video playsinline muted loop id="fondos">
+            <source src="{% static 'core/img/instalaciones.mp4' %}" type="video/mp4" >
+            
+        </video>
+    </div>
+{% endblock content %}
