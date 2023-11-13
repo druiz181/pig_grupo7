@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.urls import reverse
 from .forms import IngresosForm, TipoUsuarioForm, ClienteForm, EmpleadoForm
-from .models import Ingresos, Cliente, Empleado
+from .models import Ingresos, Cliente, Empleado, Posiciones, Stock
 
 user1 = {
     "dni": 111111111,
@@ -38,7 +39,7 @@ def index(request):
 
 
 # Alta de materiales
-
+@login_required
 def nuevo_ingreso(request):
     if request.method == "POST":
         formulario = IngresosForm(request.POST)
@@ -68,6 +69,7 @@ def nuevo_ingreso(request):
 # Listado de ingresos
 
 
+@login_required
 def listar_ingresos(request):
     listado = Ingresos.objects.all().order_by('fecha_ingreso')
     context = {
@@ -77,6 +79,7 @@ def listar_ingresos(request):
     return render(request, "core/listar_ingresos.html", context)
 
 
+@login_required
 def modificar_ingreso(request):
 
     context = {
@@ -87,27 +90,75 @@ def modificar_ingreso(request):
     # if not user1["logged_in"]: return render(request, "core/accounts/login.html")
 
 
-def pedidos(request):
+@login_required
+def nuevo_pedido(request):
     if not user1["logged_in"]:
         return render(request, "core/login.html")
 
     context = {'nombre_usuario': 'Usuario de prueba'}
-    return render(request, "core/pedidos.html", context)
+    return render(request, "core/nuevo_pedido.html", context)
 
 
-def stock(request):
+@login_required
+def listar_pedidos(request):
+    if not user1["logged_in"]:
+        return render(request, "core/login.html")
+
     context = {'nombre_usuario': 'Usuario de prueba'}
-    return render(request, "core/stock.html", context)
+    return render(request, "core/listar_pedidos.html", context)
 
 
+@login_required
+def modificar_pedido(request):
+    if not user1["logged_in"]:
+        return render(request, "core/login.html")
+
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/modificar_pedido.html", context)
+
+
+@login_required
+def listar_stock(request):
+    listado = Stock.objects.all().order_by('posicion')
+    context = {
+        'listado_stock': listado,
+        'nombre_usuario': 'Usuario de prueba',
+    }
+    return render(request, "core/listar_stock.html", context)
+
+
+@login_required
+def movimientos_material(request):
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/movimientos_material.html", context)
+
+
+@login_required
 def inventarios(request):
     context = {'nombre_usuario': 'Usuario de prueba'}
     return render(request, "core/inventarios.html", context)
 
 
-def posiciones(request):
+@login_required
+def nueva_posicion(request):
     context = {'nombre_usuario': 'Usuario de prueba'}
-    return render(request, "core/posiciones.html", context)
+    return render(request, "core/nueva_posicion.html", context)
+
+
+@login_required
+def listar_posiciones(request):
+    listado = Posiciones.objects.all().order_by('posicion')
+    context = {
+        'listado_posiciones': listado,
+        'nombre_usuario': 'Usuario de prueba',
+    }
+    return render(request, "core/listar_posiciones.html", context)
+
+
+@login_required
+def modificar_posicion(request):
+    context = {'nombre_usuario': 'Usuario de prueba'}
+    return render(request, "core/modificar_posicion.html", context)
 
 # Usuarios
 
@@ -116,6 +167,7 @@ def usuarios(request):
     return render(request, 'core/usuarios.html', context={"user1": user1})
 
 
+@login_required
 def alta_usuario(request):
     if request.method == "POST":
         tipo_form = TipoUsuarioForm(request.POST)
@@ -147,6 +199,7 @@ def alta_usuario(request):
     return render(request, 'core/alta_usuario.html', context)
 
 
+@login_required
 def listado_usuarios(request):
     clientes = Cliente.objects.all()
     empleados = Empleado.objects.all()
@@ -157,5 +210,6 @@ def listado_usuarios(request):
     return render(request, 'core/listado_usuarios.html', context)
 
 
+@login_required
 def usuario_detalle(request, usuario_id):
     return HttpResponse(f"Usuario Detalle {usuario_id}")

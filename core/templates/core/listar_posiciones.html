@@ -1,31 +1,32 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block title %} Listado de Ingresos {% endblock %}
+{% block title %} Posiciones {% endblock %}
+
+{% block section_title %} <h3>Listar Posiciones</h3> {% endblock %}
 
 {% block header %}
     {% include "core/partials/navbar.html" %}
 {% endblock %}
-
+    
 {% block main %}
-<h3> Listado de Ingresos </h3>
 
 <table class="table table-striped" style="background-color: #e0e0e0;">
     <thead>
         <tr>
-            <th>Fecha</th>
-            <th>Remito / FC</th>
+            <th>Posicion</th>
+            <th>Estado</th>
         </tr>
     </thead>
     <tbody>
-        {% for ingreso in listado_ingresos %}
+        {% for posicion in listado_posiciones %}
             <tr>
-                <td>{{ ingreso.fecha_ingreso }}</td>
-                <td>{{ ingreso.remito_fc }}</td>                 
+                <td>{{ posicion.posicion }}</td>
+                <td>{{ posicion.estado }}</td>                 
             </tr>
         {% empty %}
             <tr>
-                <td colspan="3">No hay ingresos</td>
+                <td colspan="3">No hay posiciones creadas</td>
             </tr>
         {% endfor %}
     </tbody>
@@ -37,6 +38,6 @@
     {% include "core/partials/sidebar.html" %}
 {% endblock %}
 
-{% block footer %} 
+{% block footer %}
     <!-- {% include "core/partials/footer.html" %} -->
 {% endblock %}
