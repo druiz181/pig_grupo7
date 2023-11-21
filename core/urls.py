@@ -27,4 +27,8 @@ urlpatterns = [
     path('listado_usuarios/', views.listado_usuarios, name='listado_usuarios'),
     path("usuarios/<str:usuario_id>/",
          views.usuario_detalle, name="usuario_detalle"),
+    path('nuevo_material/', views.MaterialCreateView.as_view(),
+         name="nuevo_material"),
+    path('listado_material/', views.MaterialListView.as_view(),
+         name="listado_material"),
 ]

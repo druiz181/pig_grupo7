@@ -13,18 +13,22 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'index' %}">Inicio</a>
                 </li>
-                {% if user.is_authenticated %}
                 <li class="nav-item dropdown">                    
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Ingresos
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        {% if user.is_authenticated %}
                             <li><a class="dropdown-item" href="{% url 'nuevo_ingreso' %}">Nuevo ingreso</a></li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
                             <li><a class="dropdown-item" href="{% url 'modificar_ingreso' %}">Modificar Ingreso</a></li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
                             <li><a class="dropdown-item" href="{% url 'listar_ingresos' %}">Listar ingresos</a></li>
+                        {% endif %}
                     </ul>
                 </li>
-                {% endif %}
                 <li class="nav-item dropdown">                    
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Pedidos
@@ -41,12 +45,12 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{% url 'listar_stock' %}">Listar Stock</a></li>
-                        <li><a class="dropdown-item" href="{% url 'movimientos_material' %}">Movimientos Material</a></li>                        
+                        <!-- <li><a class="dropdown-item" href="{% url 'movimientos_material' %}">Movimientos Material</a></li>                         -->
                     </ul>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{% url 'inventarios' %}">Inventarios</a>
-                </li>
+                </li> -->
                 <li class="nav-item dropdown">                    
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Posiciones
@@ -55,6 +59,15 @@
                         <li><a class="dropdown-item" href="{% url 'nueva_posicion' %}">Nueva Posicion</a></li>
                         <li><a class="dropdown-item" href="{% url 'modificar_posicion' %}">Modificar Posicion</a></li>
                         <li><a class="dropdown-item" href="{% url 'listar_posiciones' %}">Listar Posiciones</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">                    
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Materiales
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'nuevo_material' %}">Nuevo Material</a></li>
+                        <li><a class="dropdown-item" href="{% url 'listado_material' %}">Listar Materiales</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

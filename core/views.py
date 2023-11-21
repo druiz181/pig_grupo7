@@ -4,8 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.urls import reverse
-from .forms import IngresosForm, TipoUsuarioForm, ClienteForm, EmpleadoForm
-from .models import Ingresos, Cliente, Empleado, Posiciones, Stock
+from .forms import IngresosForm, TipoUsuarioForm, ClienteForm, EmpleadoForm, PosicionForm
+from .models import Ingresos, Cliente, Empleado, Posiciones, Stock, Material
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 
 user1 = {
     "dni": 111111111,
@@ -46,12 +48,17 @@ def nuevo_ingreso(request):
         if formulario.is_valid():
             nuevo_ingreso = Ingresos(
                 remito_fc=formulario.cleaned_data['remito_fc'],
-                fecha_ingreso=formulario.cleaned_data['fecha_ingreso'],
-                sku=formulario.cleaned_data['sku'],
+                fecha_ingreso=formulario.cleaned_data['fecha_ingreso']
+            )
+            nuevo_ingreso_stock = Stock(
+                material=formulario.cleaned_data['material'],
                 cantidad=formulario.cleaned_data['cantidad'],
+                posicion=formulario.cleaned_data['posicion'],
+                ingreso=nuevo_ingreso
             )
             try:
                 nuevo_ingreso.save()
+                nuevo_ingreso_stock.save()
                 messages.success(request, "Se registró el ingreso")
                 return redirect("listar_ingresos")
             except IntegrityError as ie:
@@ -62,7 +69,7 @@ def nuevo_ingreso(request):
 
     context = {
         'nombre_usuario': 'Usuario de prueba',
-        'nuevo_ingreso_form': formulario
+        'nuevo_ingreso_form': formulario,
     }
     return render(request, "core/nuevo_ingreso.html", context)
 
@@ -141,7 +148,27 @@ def inventarios(request):
 
 @login_required
 def nueva_posicion(request):
-    context = {'nombre_usuario': 'Usuario de prueba'}
+    if request.method == "POST":
+        formulario = PosicionForm(request.POST)
+        if formulario.is_valid():
+            nueva_posicion = Posiciones(
+                posicion=formulario.cleaned_data['posicion'],
+                estado=formulario.cleaned_data['estado'],
+            )
+            try:
+                nueva_posicion.save()
+                messages.success(request, "Se registró la posicion")
+                return redirect("listar_posiciones")
+            except IntegrityError as ie:
+                messages.error(
+                    request, "No se pudo registrar la posicion debido a un error en la base de datos.")
+    else:
+        formulario = PosicionForm()
+
+    context = {
+        'nombre_usuario': 'Usuario de prueba',
+        'nueva_posicion_form': formulario
+    }
     return render(request, "core/nueva_posicion.html", context)
 
 
@@ -213,3 +240,25 @@ def listado_usuarios(request):
 @login_required
 def usuario_detalle(request, usuario_id):
     return HttpResponse(f"Usuario Detalle {usuario_id}")
+
+
+def listado_pedidos(request):
+    pedidos = Pedidos.objects.all()
+    context = {
+        'pedidos': pedidos,
+    }
+    return render(request, 'core/listado_pedidos.html', context)
+
+
+class MaterialCreateView(CreateView):
+    model = Material
+    template_name = 'core/nuevo_material.html'
+    succes_url = 'listado_material'
+    fields = '__all__'
+
+
+class MaterialListView(ListView):
+    model = Material
+    context_object_name = 'listado_material'
+    template_name = 'core/listado_material.html'
+    ordering = ['sku']

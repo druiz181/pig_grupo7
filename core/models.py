@@ -78,6 +78,10 @@ class Ingresos(models.Model):
     def __str__(self):
         return f'Remito / FC: {self.remito_fc} Fecha de Ingreso: {self.fecha_ingreso}'
 
+    def mostrar_materiales(self):
+        list_materiales = Stock.objects.filter(ingreso=self)
+        return list_materiales
+
 # Stock: Uniendo materiales y posiciones
 
 

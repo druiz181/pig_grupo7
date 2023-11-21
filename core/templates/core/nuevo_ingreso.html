@@ -19,12 +19,13 @@
 
             <form id="nuevoingreso" method="post" action="{% url 'nuevo_ingreso' %}">
                 {% csrf_token %}
-                {{ nuevo_ingreso_form.as_p }}
+                {{ nuevo_ingreso_form.as_p }}     
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-dark">Enviar</button>
+                    <button type="submit" class="btn btn-dark">Agregar</button>
+                    <button type="submit" class="btn btn-dark">Guardar</button>
                 </div>
             </form>
-                
+                            
         </div>
     </div>
 </div>
