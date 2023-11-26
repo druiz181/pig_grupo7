@@ -93,4 +93,4 @@ class Stock(models.Model):
     ingreso = models.ForeignKey(Ingresos, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Material: {self.material} Cantidad: {self.cantidad} {self.posicion} {self.ingreso} '
+        return f'Material: {self.material} Cantidad: {self.cantidad} {self.posicion} {self.ingreso}'

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.urls import reverse
-from .forms import IngresosForm, TipoUsuarioForm, ClienteForm, EmpleadoForm, PosicionForm
+from .forms import IngresosForm, TipoUsuarioForm, ClienteForm, EmpleadoForm, PosicionForm, StockForm
 from .models import Ingresos, Cliente, Empleado, Posiciones, Stock, Material
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
@@ -41,6 +41,7 @@ def index(request):
 
 
 # Alta de materiales
+
 @login_required
 def nuevo_ingreso(request):
     if request.method == "POST":
@@ -50,17 +51,12 @@ def nuevo_ingreso(request):
                 remito_fc=formulario.cleaned_data['remito_fc'],
                 fecha_ingreso=formulario.cleaned_data['fecha_ingreso']
             )
-            nuevo_ingreso_stock = Stock(
-                material=formulario.cleaned_data['material'],
-                cantidad=formulario.cleaned_data['cantidad'],
-                posicion=formulario.cleaned_data['posicion'],
-                ingreso=nuevo_ingreso
-            )
             try:
                 nuevo_ingreso.save()
-                nuevo_ingreso_stock.save()
-                messages.success(request, "Se registró el ingreso")
-                return redirect("listar_ingresos")
+                formulario = StockForm()
+                context = {'ingreso_stock_form': formulario,
+                           'nuevo_ingreso': nuevo_ingreso}
+                return render(request, "core/ingreso_stock.html", context)
             except IntegrityError as ie:
                 messages.error(
                     request, "No se pudo registrar el ingreso debido a un error en la base de datos.")
@@ -68,15 +64,34 @@ def nuevo_ingreso(request):
         formulario = IngresosForm()
 
     context = {
-        'nombre_usuario': 'Usuario de prueba',
-        'nuevo_ingreso_form': formulario,
-    }
+        'nuevo_ingreso_form': formulario, }
     return render(request, "core/nuevo_ingreso.html", context)
+
+
+@login_required
+def ingreso_stock(request):
+    formulario = StockForm(request.POST)
+    if formulario.is_valid():
+        nuevo_ingreso_stock = Stock(
+            material=formulario.cleaned_data['material'].first(),
+            cantidad=formulario.cleaned_data['cantidad'],
+            posicion=formulario.cleaned_data['posicion'].first())
+        # ingreso=context['nuevo_ingreso'])
+        try:
+            nuevo_ingreso_stock.save()
+            formulario = StockForm()
+            context['ingreso_stock_form'] = formulario
+            return render(request, "core/ingreso_stock.html", context)
+        except IntegrityError as ie:
+            messages.error(
+                request, "No se pudo registrar el ingreso debido a un error en la base de datos.")
+    # return render(request, "core/ingreso_stock.html", context)
+
 
 # Listado de ingresos
 
 
-@login_required
+@ login_required
 def listar_ingresos(request):
     listado = Ingresos.objects.all().order_by('fecha_ingreso')
     context = {
@@ -86,7 +101,7 @@ def listar_ingresos(request):
     return render(request, "core/listar_ingresos.html", context)
 
 
-@login_required
+@ login_required
 def modificar_ingreso(request):
 
     context = {
@@ -97,7 +112,7 @@ def modificar_ingreso(request):
     # if not user1["logged_in"]: return render(request, "core/accounts/login.html")
 
 
-@login_required
+@ login_required
 def nuevo_pedido(request):
     if not user1["logged_in"]:
         return render(request, "core/login.html")
@@ -106,7 +121,7 @@ def nuevo_pedido(request):
     return render(request, "core/nuevo_pedido.html", context)
 
 
-@login_required
+@ login_required
 def listar_pedidos(request):
     if not user1["logged_in"]:
         return render(request, "core/login.html")
@@ -115,7 +130,7 @@ def listar_pedidos(request):
     return render(request, "core/listar_pedidos.html", context)
 
 
-@login_required
+@ login_required
 def modificar_pedido(request):
     if not user1["logged_in"]:
         return render(request, "core/login.html")
@@ -124,7 +139,7 @@ def modificar_pedido(request):
     return render(request, "core/modificar_pedido.html", context)
 
 
-@login_required
+@ login_required
 def listar_stock(request):
     listado = Stock.objects.all().order_by('posicion')
     context = {
@@ -134,19 +149,19 @@ def listar_stock(request):
     return render(request, "core/listar_stock.html", context)
 
 
-@login_required
+@ login_required
 def movimientos_material(request):
     context = {'nombre_usuario': 'Usuario de prueba'}
     return render(request, "core/movimientos_material.html", context)
 
 
-@login_required
+@ login_required
 def inventarios(request):
     context = {'nombre_usuario': 'Usuario de prueba'}
     return render(request, "core/inventarios.html", context)
 
 
-@login_required
+@ login_required
 def nueva_posicion(request):
     if request.method == "POST":
         formulario = PosicionForm(request.POST)
@@ -172,7 +187,7 @@ def nueva_posicion(request):
     return render(request, "core/nueva_posicion.html", context)
 
 
-@login_required
+@ login_required
 def listar_posiciones(request):
     listado = Posiciones.objects.all().order_by('posicion')
     context = {
@@ -182,7 +197,7 @@ def listar_posiciones(request):
     return render(request, "core/listar_posiciones.html", context)
 
 
-@login_required
+@ login_required
 def modificar_posicion(request):
     context = {'nombre_usuario': 'Usuario de prueba'}
     return render(request, "core/modificar_posicion.html", context)
@@ -194,7 +209,7 @@ def usuarios(request):
     return render(request, 'core/usuarios.html', context={"user1": user1})
 
 
-@login_required
+@ login_required
 def alta_usuario(request):
     if request.method == "POST":
         tipo_form = TipoUsuarioForm(request.POST)
@@ -226,7 +241,7 @@ def alta_usuario(request):
     return render(request, 'core/alta_usuario.html', context)
 
 
-@login_required
+@ login_required
 def listado_usuarios(request):
     clientes = Cliente.objects.all()
     empleados = Empleado.objects.all()
@@ -237,7 +252,7 @@ def listado_usuarios(request):
     return render(request, 'core/listado_usuarios.html', context)
 
 
-@login_required
+@ login_required
 def usuario_detalle(request, usuario_id):
     return HttpResponse(f"Usuario Detalle {usuario_id}")
 
@@ -253,8 +268,8 @@ def listado_pedidos(request):
 class MaterialCreateView(CreateView):
     model = Material
     template_name = 'core/nuevo_material.html'
-    succes_url = 'listado_material'
-    fields = '__all__'
+    success_url = '../listado_material'
+    fields = ['sku', 'descripcion']
 
 
 class MaterialListView(ListView):

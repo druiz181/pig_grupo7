@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Ingresos, Empleado, Cliente, Material, Posiciones, Stock
 
+
 # Ingreso de materiales
 
 
@@ -9,16 +10,6 @@ class IngresosForm(forms.Form):
     remito_fc = forms.CharField(label="Remito / FC")
     fecha_ingreso = forms.DateField(
         label="Fecha de ingreso", widget=forms.SelectDateWidget())
-    material = forms.ModelMultipleChoiceField(
-        queryset=Material.objects.all())
-    cantidad = forms.IntegerField(label="Cantidad")
-    posicion = forms.ModelMultipleChoiceField(
-        queryset=Posiciones.objects.all())
-
-    def clean_cantidad(self):
-        if self.cleaned_data["cantidad"] < 1:
-            raise ValidationError("Ingrese cantidad")
-        return self.cleaned_data["cantidad"]
 
 
 # Alta de usuarios
@@ -43,6 +34,14 @@ class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
         fields = '__all__'
+
+
+class StockForm(forms.Form):
+    material = forms.ModelMultipleChoiceField(
+        queryset=Material.objects.all())
+    cantidad = forms.IntegerField(label="Cantidad")
+    posicion = forms.ModelMultipleChoiceField(
+        queryset=Posiciones.objects.all())
 
 
 class Material(forms.ModelForm):

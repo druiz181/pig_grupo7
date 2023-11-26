@@ -12,7 +12,7 @@
 
 <table class="table table-sm">
     <thead>
-        <tr style="background-color: aquamarine;">
+        <tr style="background-color: aquamarine; opacity: 0.7;">
             <th>Fecha</th>
             <th colspan="2">Remito / FC</th>
         </tr>
@@ -22,7 +22,7 @@
 
         </td> 
         {% for ingreso in listado_ingresos %}
-            <tr style="background-color: rgb(10,200,250)">
+            <tr style="background-color: rgb(10,200,250); opacity: 0.75;">
                 <td>{{ ingreso.fecha_ingreso }}</td>
                 <td colspan="2">{{ ingreso.remito_fc }}</td>
             </tr>

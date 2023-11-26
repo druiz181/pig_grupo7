@@ -15,7 +15,7 @@
         <div class="col-md-6 col-md-offset-3">
             <h3 h3 style="color: black;">Nuevo Material</h3>
 
-            <form id="nuevoingreso" method="post" action="{% url 'nuevo_ingreso' %}">
+            <form id="nuevomaterial" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="form-group text-center">
