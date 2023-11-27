@@ -8,42 +8,36 @@
 {% endblock %}
 
 {% block main %}
-<h3> Listado de Ingresos </h3>
+<h3>Listado de Ingresos</h3>
 
 <table class="table table-sm">
     <thead>
         <tr style="background-color: aquamarine; opacity: 0.7;">
             <th>Fecha</th>
-            <th colspan="2">Remito / FC</th>
+            <th>Remito / FC</th>
+            <th>Sku</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Posición</th>
         </tr>
     </thead>
     <tbody>
-        <td colspan="3">
-
-        </td> 
         {% for ingreso in listado_ingresos %}
-            <tr style="background-color: rgb(10,200,250); opacity: 0.75;">
-                <td>{{ ingreso.fecha_ingreso }}</td>
-                <td colspan="2">{{ ingreso.remito_fc }}</td>
-            </tr>
-            <tr style="background-color: lightblue;">
-                <td> Sku </td>
-                <td> Descripcion </td>
-                <td> Cantidad </td>
-            </tr>
-            {% for linea in ingreso.mostrar_materiales %}   
+            {% for linea in ingreso.mostrar_materiales %}
                 <tr style="background-color: rgb(215, 242, 248)">
+                    {% if forloop.first %}
+                        <td rowspan="{{ ingreso.mostrar_materiales.count }}">{{ ingreso.fecha_ingreso }}</td>
+                        <td rowspan="{{ ingreso.mostrar_materiales.count }}">{{ ingreso.remito_fc }}</td>
+                    {% endif %}
                     <td>{{ linea.material.sku }}</td>
                     <td>{{ linea.material.descripcion }}</td>
-                    <td>{{ linea.cantidad }}</td>  
-                </tr>    
-            {% endfor %}   
-            <td colspan="3">
-
-            </td>        
+                    <td>{{ linea.cantidad }}</td>
+                    <td>{{ linea.posicion }}</td>
+                </tr>
+            {% endfor %}
         {% empty %}
             <tr>
-                <td colspan="3">No hay ingresos</td>
+                <td colspan="6">No hay ingresos</td>
             </tr>
         {% endfor %}
     </tbody>

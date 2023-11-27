@@ -1,5 +1,8 @@
 {% extends "core/base.html" %}
 {% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/index.css' %}">
+{% endblock %}
 
 {% block title %} Inicio {% endblock %}
 
@@ -10,7 +13,37 @@
 {% endblock %}
     
 {% block main %}
-    
+<style>
+    /* Pongo esto acá porque no me toma el css */
+    #bienvenida {
+        background-color: rgba(204, 209, 209, 0.7); 
+        padding: 20px;
+        border-radius: 10px;
+                
+    }
+
+    #bienvenida p {
+    text-align: justify; 
+    margin-bottom: 15px;     
+}
+</style>
+
+    <div id="bienvenida"> 
+             
+        <p>¡Bienvenido a Depotfy - Tu Solución de Gestión de Depósito!</p>
+        
+        <p>Depotfy es tu aliado en el control y organización eficiente de tu almacén. Nuestra plataforma te brinda herramientas poderosas para gestionar inventarios, realizar seguimiento de ingresos y pedidos, administrar el stock, y mucho más, todo en un solo lugar.</p>
+        
+        <p>¿Buscás simplificar tus operaciones logísticas? ¡Estás en el lugar correcto! Descubrí cómo Depotfy puede optimizar tus procesos de almacén. No dudes en ponerte en contacto con nosotros para obtener más información. Envianos un correo electrónico a <a href="mailto:info@depotfy.com">info@depotfy.com</a> y nuestro equipo estará encantado de atenderte.</p>
+        
+        <p>¡Bienvenido a una gestión de almacén más inteligente y eficaz con Depotfy!</p>
+        
+        
+        
+        
+        
+        
+    </p>
 {% endblock %}
 
 {% block sidebar %}     

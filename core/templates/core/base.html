@@ -1,5 +1,7 @@
 {% load static %}
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,7 +38,9 @@
 
 <body class="vw-100 minh-100">
     <header>
-        {% block header %} {% endblock %}
+
+        
+        {% block header %} {% include "core/partials/navbar.html" %} {% endblock %}
     </header>
     <main class="">
         <img id="fondos" src="{% static 'core/img/wh_image.jpeg' %}" alt="wh_image">

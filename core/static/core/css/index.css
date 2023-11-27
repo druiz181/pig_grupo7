@@ -2,3 +2,9 @@ h1 {
     color: white;
     margin-left: 15px;
 }
+
+#welcome-message {
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para mejorar la legibilidad */
+    padding: 20px;
+    border-radius: 10px;
+}

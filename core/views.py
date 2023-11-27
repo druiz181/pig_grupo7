@@ -70,24 +70,40 @@ def nuevo_ingreso(request):
 
 @login_required
 def ingreso_stock(request):
-    formulario = StockForm(request.POST)
-    if formulario.is_valid():
-        nuevo_ingreso_stock = Stock(
-            material=formulario.cleaned_data['material'].first(),
-            cantidad=formulario.cleaned_data['cantidad'],
-            posicion=formulario.cleaned_data['posicion'].first())
-        # ingreso=context['nuevo_ingreso'])
-        try:
-            nuevo_ingreso_stock.save()
-            formulario = StockForm()
-            context['ingreso_stock_form'] = formulario
-            return render(request, "core/ingreso_stock.html", context)
-        except IntegrityError as ie:
-            messages.error(
-                request, "No se pudo registrar el ingreso debido a un error en la base de datos.")
-    # return render(request, "core/ingreso_stock.html", context)
+    if request.method == 'POST':
+        formulario = StockForm(request.POST)
+        if formulario.is_valid():
+            # Obtener los datos del formulario
+            material = formulario.cleaned_data['material'].first()
+            cantidad = formulario.cleaned_data['cantidad']
+            posicion = formulario.cleaned_data['posicion'].first()
+            ultimo_ingreso = Ingresos.objects.latest('id')
+
+            try:
+                # Crear una instancia del modelo Stock con los datos del formulario
+                nuevo_ingreso_stock = Stock.objects.create(
+                    material=material,
+                    cantidad=cantidad,
+                    posicion=posicion,
+                    ingreso=ultimo_ingreso
+                )
+                messages.success(request, "¡Ingreso de stock exitoso!")  
+                return redirect('listar_ingresos')  
+            except IntegrityError as e:
+                print(e) 
+                messages.error(request, "Error en la base de datos: " + str(e))
+        else:
+            messages.error(request, "Por favor, corrige los errores en el formulario.")
+    else:
+        formulario = StockForm()
+
+    context = {
+        'ingreso_stock_form': formulario,
+    }
+    return render(request, "core/ingreso_stock.html", context)
 
 
+ 
 # Listado de ingresos
 
 
@@ -96,7 +112,7 @@ def listar_ingresos(request):
     listado = Ingresos.objects.all().order_by('fecha_ingreso')
     context = {
         'listado_ingresos': listado,
-        'nombre_usuario': 'Usuario de prueba',
+        # 'nombre_usuario': 'Usuario de prueba',
     }
     return render(request, "core/listar_ingresos.html", context)
 
