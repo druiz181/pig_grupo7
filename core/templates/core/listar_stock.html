@@ -1,0 +1,47 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Stock {% endblock %}
+
+{% block section_title %} <h3>Listar Stock</h3> {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+
+<table class="table table-striped" style="background-color: #e0e0e0;">
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Posición</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for elemento in listado_stock %}
+            <tr>
+                <td>{{ elemento.material.sku }}</td>
+                <td>{{ elemento.material.descripcion }}</td>   
+                <td>{{ elemento.cantidad }}</td>
+                <td>{{ elemento.posicion.posicion }}</td>               
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">No hay posiciones creadas</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %}
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "core/base.html" %}
+{% load static %}
+<!-- {% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/forms.css' %}">
+{% endblock %} -->
+
+{% block title %} Alta de Usuario {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+
+{% block main %}
+<div class="container" style="background-color: #e0e0e0;">
+    <div class="row my-3">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 h3 style="color: black;">Alta de Usuario</h3>
+
+            <form id="altausuario" method="post">
+                {% csrf_token %}
+                {{ tipo_form.as_p }}
+
+                <div class="form-group">
+                    <div class="row my-3"> 
+                        <div class="col-md-6">
+                            {{ usuario_form.nombre.label_tag }}
+                            {{ usuario_form.nombre }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ usuario_form.apellido.label_tag }}
+                            {{ usuario_form.apellido }}
+                        </div>
+                    </div>
+
+                    <div class="row my-3"> 
+                        <div class="col-md-6">
+                            {{ usuario_form.email.label_tag }}
+                            {{ usuario_form.email }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ usuario_form.dni.label_tag }}
+                            {{ usuario_form.dni }}
+                        </div>
+                    </div>
+                    
+                    {% if tipo_form.tipo.value == 'cliente' %}
+                        <div class="row my-3"> 
+                            <div class="col-md-6">
+                                {{ usuario_form.tipo_cliente.label_tag }}
+                                {{ usuario_form.tipo_cliente }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ usuario_form.empresa.label_tag }}
+                                {{ usuario_form.empresa }}
+                            </div>
+                        </div>
+                    {% elif tipo_form.tipo.value == 'empleado' %}
+                        <div class="row my-3"> 
+                            <div class="col-md-6">
+                                {{ usuario_form.legajo.label_tag }}
+                                {{ usuario_form.legajo }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ usuario_form.rol.label_tag }}
+                                {{ usuario_form.rol }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ usuario_form.clientes.label_tag }}
+                                {{ usuario_form.clientes }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-dark">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %} 
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}

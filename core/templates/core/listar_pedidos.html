@@ -1,0 +1,52 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Listado de Pedidos {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+
+{% block main %}
+<h3>Listado de Pedidos</h3>
+
+<table class="table table-sm">
+    <thead>
+        <tr style="background-color: aquamarine; opacity: 0.7;">
+            <th>Fecha</th>
+            <th>Remito / OC</th>
+            <th>Sku</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Posición</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in listado_pedidos %}
+            <tr style="background-color: rgb(215, 242, 248)">
+                {% if forloop.first %}
+                    <td>{{ pedido.remito_OC }}</td>
+                    <td>{{ pedido.fecha_pedido }}</td>
+                {% endif %}
+                <!-- <td>{{ linea.material.sku }}</td>
+                <td>{{ linea.material.descripcion }}</td>
+                <td>{{ linea.cantidad }}</td>
+                <td>{{ linea.posicion.posicion }}</td> -->
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No hay Pedidos</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %} 
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}

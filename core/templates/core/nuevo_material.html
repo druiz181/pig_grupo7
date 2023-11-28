@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Materiales {% endblock %}
+
+{% block section_title %} <h3>Nuevo Material</h3> {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+    
+{% block main %}
+<div class="container" style="background-color: #e0e0e0";>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 h3 style="color: black;">Nuevo Material</h3>
+
+            <form id="nuevomaterial" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-dark">Enviar</button>
+                </div>
+            </form>
+                
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %}
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %} Listado de Ingresos {% endblock %}
+
+{% block header %}
+    {% include "core/partials/navbar.html" %}
+{% endblock %}
+
+{% block main %}
+<h3>Listado de Ingresos</h3>
+
+<table class="table table-sm">
+    <thead>
+        <tr style="background-color: aquamarine; opacity: 0.7;">
+            <th>Fecha</th>
+            <th>Remito / FC</th>
+            <th>Sku</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Posición</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ingreso in listado_ingresos %}
+            {% for linea in ingreso.mostrar_materiales %}
+                <tr style="background-color: rgb(215, 242, 248)">
+                    {% if forloop.first %}
+                        <td rowspan="{{ ingreso.mostrar_materiales.count }}">{{ ingreso.fecha_ingreso }}</td>
+                        <td rowspan="{{ ingreso.mostrar_materiales.count }}">{{ ingreso.remito_fc }}</td>
+                    {% endif %}
+                    <td>{{ linea.material.sku }}</td>
+                    <td>{{ linea.material.descripcion }}</td>
+                    <td>{{ linea.cantidad }}</td>
+                    <td>{{ linea.posicion.posicion }}</td>
+                </tr>
+            {% endfor %}
+        {% empty %}
+            <tr>
+                <td colspan="6">No hay ingresos</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block sidebar %} 
+    {% include "core/partials/sidebar.html" %}
+{% endblock %}
+
+{% block footer %} 
+    <!-- {% include "core/partials/footer.html" %} -->
+{% endblock %}
