@@ -88,7 +88,7 @@ def ingreso_stock(request):
                     ingreso=ultimo_ingreso
                 )
                 nuevo_ingreso_stock.save()
-                messages.success(request, "¡Ingreso de stock exitoso!")  
+                # messages.success(request, "¡Ingreso de stock exitoso!")  
                 # return redirect('listar_ingresos')  
             except IntegrityError as e:
                 print(e) 
@@ -98,9 +98,11 @@ def ingreso_stock(request):
     else:
         formulario = StockForm()
 
+    listado = Ingresos.objects.latest('id')
     formulario = StockForm()
     context = {'ingreso_stock_form': formulario,
-               'nuevo_ingreso': nuevo_ingreso}
+               'nuevo_ingreso': nuevo_ingreso,
+               'listado': listado}
     return render(request, "core/ingreso_stock.html", context)
     
 

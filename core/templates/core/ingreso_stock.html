@@ -16,7 +16,7 @@
 <div class="container" style="background-color: #e0e0e0; opacity: 0.85;" >
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h3 h3 style="color: black;">Nuevos Ingresos - Stock </h3>
+            <h3 h3 style="color: black;">Ingrese Stock para el remito: {{ nuevo_ingreso.remito_fc}} </h3>
             <form id="nuevoingreso" method="post" action="{% url 'ingreso_stock' %}">
                 {% csrf_token %}
                 {{ ingreso_stock_form.as_p }} 
@@ -25,6 +25,30 @@
                     <a href="{% url 'listar_ingresos' %}" class="btn btn-default">Finalizar</a>
                 </div>
             </form>
+            <table class="table table-sm">
+                <thead>
+                    <tr style="background-color: aquamarine; opacity: 0.7;">
+                        <th>Sku</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Posición</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for linea in listado.mostrar_materiales %}
+                        <tr style="background-color: rgb(215, 242, 248)">
+                            <td>{{ linea.material.sku }}</td>
+                            <td>{{ linea.material.descripcion }}</td>
+                            <td>{{ linea.cantidad }}</td>
+                            <td>{{ linea.posicion.posicion }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6">No hay ingresos</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
                             
         </div>
     </div>
