@@ -95,15 +95,20 @@ class Stock(models.Model):
     def __str__(self):
         return f'Material: {self.material} Cantidad: {self.cantidad} {self.posicion} {self.ingreso}'
 
-# class Pedidos(models.Model):
-#     remito_OC = models.CharField(verbose_name="Remito / OC")
-#     fecha_pedido = fecha_pedido = models.DateField(verbose_name="Fecha del Pedido") 
-#     pedido_stock = models.ManyToManyField(Material, through="Salidas")
+class Pedidos(models.Model):
+    remito_OC = models.CharField(verbose_name="Remito / OC")
+    fecha_pedido = fecha_pedido = models.DateField(verbose_name="Fecha del Pedido") 
+    pedido_stock = models.ManyToManyField(Material, through="Salidas")
 
-#     def __str__(self):
-#         return f'Remito / OC: {self.remito_OC} Fecha del Pedido: {self.fecha_pedido}'
+    def __str__(self):
+        return f'Remito / OC: {self.remito_OC} Fecha del Pedido: {self.fecha_pedido}'
+    
+    def mostrar_materiales(self):
+        list_materiales = Salidas.objects.filter(pedido=self)
+        return list_materiales
 
-# class Salidas(models.Model):
-#     material = models.ForeignKey(Material, on_delete=models.CASCADE)
-#     cantidad = models.PositiveIntegerField(verbose_name="Cantidad")
-#     del_stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
+class Salidas(models.Model):
+    material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(verbose_name="Cantidad")
+    del_stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    pedido = models.ForeignKey(Pedidos, on_delete=models.CASCADE)

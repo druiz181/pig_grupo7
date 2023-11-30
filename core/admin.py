@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Empleado, Cliente, EmpleadoCliente, Posiciones, Stock, Material, Ingresos
+from core.models import Empleado, Cliente, EmpleadoCliente, Posiciones, Stock, Material, Ingresos, Pedidos, Salidas
 
 # Register your models here.
 
@@ -17,6 +17,11 @@ class StockAdmin(admin.ModelAdmin):
     list_display_links = ['material']
     search_fields = ['material.sku']
 
+class SalidasAdmin(admin.ModelAdmin):
+    list_display = ('material', 'cantidad','del_stock')
+    list_editable = ['cantidad','del_stock']
+    list_display_links = ['material']
+    search_fields = ['material.sku']
 
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
@@ -36,4 +41,5 @@ admin.site.register(Posiciones)
 admin.site.register(Stock, StockAdmin)
 # admin.site.register(Material, MaterialAdmin)
 admin.site.register(Ingresos, IngresoAdmin)
-# admin.site.register(Pedidos)
+admin.site.register(Pedidos)
+admin.site.register(Salidas, SalidasAdmin)

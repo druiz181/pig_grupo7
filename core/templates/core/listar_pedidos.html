@@ -23,16 +23,18 @@
     </thead>
     <tbody>
         {% for pedido in listado_pedidos %}
-            <tr style="background-color: rgb(215, 242, 248)">
-                {% if forloop.first %}
-                    <td>{{ pedido.remito_OC }}</td>
-                    <td>{{ pedido.fecha_pedido }}</td>
-                {% endif %}
-                <!-- <td>{{ linea.material.sku }}</td>
-                <td>{{ linea.material.descripcion }}</td>
-                <td>{{ linea.cantidad }}</td>
-                <td>{{ linea.posicion.posicion }}</td> -->
-            </tr>
+            {% for linea in pedido.mostrar_materiales %}
+                <tr style="background-color: rgb(215, 242, 248)">
+                    {% if forloop.first %}
+                        <td rowspan="{{ pedido.mostrar_materiales.count }}">{{ pedido.remito_OC }}</td>
+                        <td rowspan="{{ pedido.mostrar_materiales.count }}">{{ pedido.fecha_pedido }}</td>
+                    {% endif %}
+                    <td>{{ linea.material.sku }}</td>
+                    <td>{{ linea.material.descripcion }}</td>
+                    <td>{{ linea.cantidad }}</td>
+                    <td>{{ linea.del_stock.posicion.posicion }}</td>
+                </tr>
+            {% endfor %}
         {% empty %}
             <tr>
                 <td colspan="6">No hay Pedidos</td>

@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Ingresos, Empleado, Cliente, Material, Posiciones, Stock
+from .models import Ingresos, Empleado, Cliente, Material, Posiciones, Stock, Pedidos
 
 
 # Ingreso de materiales
@@ -10,6 +10,11 @@ class IngresosForm(forms.Form):
     remito_fc = forms.CharField(label="Remito / FC")
     fecha_ingreso = forms.DateField(
         label="Fecha de ingreso", widget=forms.SelectDateWidget())
+
+class PedidosForm(forms.Form):
+    remito_OC = forms.CharField(label="Remito / OC")
+    fecha_pedido = forms.DateField(
+        label="Fecha del Pedido", widget=forms.SelectDateWidget())
 
 
 # Alta de usuarios
@@ -43,6 +48,13 @@ class StockForm(forms.Form):
     posicion = forms.ModelMultipleChoiceField(
         queryset=Posiciones.objects.all())
 
+class SalidasForm(forms.Form):
+    material = forms.ModelMultipleChoiceField(
+        queryset=Material.objects.all())
+    cantidad = forms.IntegerField(label="Cantidad")
+    del_stock = forms.ModelMultipleChoiceField(
+        queryset=Stock.objects.all())
+
 
 class Material(forms.ModelForm):
     class Meta:
@@ -52,13 +64,15 @@ class Material(forms.ModelForm):
             'sku': {'required': 'Debe completar SKU'}
         }
 
-# class Pedidos(forms.ModelForm):
-#     class Meta:
-#         model: Pedidos
-#         fields = '__all__'
+class Pedidos(forms.ModelForm):
+    class Meta:
+        model: Pedidos
+        fields = '__all__'
         
 
 class PosicionForm(forms.Form):
     posicion = forms.CharField(label="Ubicación", max_length=10)
     estado = forms.CharField(
         label="Estado de la posición", max_length=8)
+
+

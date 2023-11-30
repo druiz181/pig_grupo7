@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.urls import reverse
-from .forms import IngresosForm, TipoUsuarioForm, ClienteForm, EmpleadoForm, PosicionForm, StockForm
-from .models import Ingresos, Cliente, Empleado, Posiciones, Stock, Material
+from .forms import IngresosForm, TipoUsuarioForm, ClienteForm, EmpleadoForm, PosicionForm, StockForm, PedidosForm, SalidasForm
+from .models import Ingresos, Cliente, Empleado, Posiciones, Stock, Material, Pedidos, Salidas
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 
@@ -134,26 +134,74 @@ def modificar_ingreso(request):
 
 @ login_required
 def nuevo_pedido(request):
-    if not user1["logged_in"]:
-        return render(request, "core/login.html")
+    if request.method == "POST":
+        formulario = PedidosForm(request.POST)
+        if formulario.is_valid():
+            nuevo_pedido = Pedidos(
+                remito_OC=formulario.cleaned_data['remito_OC'],
+                fecha_pedido=formulario.cleaned_data['fecha_pedido']
+                )
+            try:
+                nuevo_pedido.save()
+                formulario = SalidasForm()
+                context = {'pedido_stock_form': formulario,
+                        'nuevo_pedido': nuevo_pedido}
+                return render(request, "core/pedido_stock.html", context)
+            except IntegrityError as ie:
+                messages.error(
+                    request, "No se pudo registrar el pedido debido a un error en la base de datos.")
+    else:
+        formulario = PedidosForm()
 
-    context = {'nombre_usuario': 'Usuario de prueba'}
+    context = {
+        'nuevo_pedido_form': formulario, }
     return render(request, "core/nuevo_pedido.html", context)
+
+@login_required
+def pedido_stock(request):
+    if request.method == 'POST':
+        formulario = SalidasForm(request.POST)
+        if formulario.is_valid():
+            # Obtener los datos del formulario
+            material = formulario.cleaned_data['material'].first()
+            cantidad = formulario.cleaned_data['cantidad']
+            del_stock = formulario.cleaned_data['del_stock'].first()
+            ultimo_pedido = Pedidos.objects.latest('id')
+
+            try:
+                # Crear una instancia del modelo Stock con los datos del formulario
+                nuevo_pedido_stock = Salidas.objects.create(
+                    material=material,
+                    cantidad=cantidad,
+                    del_stock=del_stock,
+                    pedido=ultimo_pedido
+                )
+                nuevo_pedido_stock.save() 
+            except IntegrityError as e:
+                print(e) 
+                messages.error(request, "Error en la base de datos: " + str(e))
+        else:
+            messages.error(request, "Por favor, corrige los errores en el formulario.")
+    else:
+        formulario = SalidasForm()
+
+    listado = Pedidos.objects.latest('id')
+    formulario = SalidasForm()
+    context = {'pedido_stock_form': formulario,
+               'nuevo_pedido': nuevo_ingreso,
+               'listado': listado}
+    return render(request, "core/pedido_stock.html", context)
 
 
 @ login_required
 def listar_pedidos(request):
-    if not user1["logged_in"]:
-        return render(request, "core/login.html")
-
-    context = {'nombre_usuario': 'Usuario de prueba'}
+    listado = Pedidos.objects.all().order_by('fecha_pedido')
+    context = {'listado_pedidos': listado}
     return render(request, "core/listar_pedidos.html", context)
 
 
 @ login_required
 def modificar_pedido(request):
-    if not user1["logged_in"]:
-        return render(request, "core/login.html")
 
     context = {'nombre_usuario': 'Usuario de prueba'}
     return render(request, "core/modificar_pedido.html", context)
